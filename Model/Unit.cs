@@ -3,8 +3,8 @@ using System;
 namespace Com.CodeGame.CodeWars2017.DevKit.CSharpCgdk.Model {
     public abstract class Unit {
         private readonly long id;
-        private readonly double x;
-        private readonly double y;
+        private double x;
+        private double y;
 
         protected Unit(long id, double x, double y) {
             this.id = id;
@@ -34,6 +34,12 @@ namespace Com.CodeGame.CodeWars2017.DevKit.CSharpCgdk.Model {
 
         public double GetSquaredDistanceTo(Unit unit) {
             return GetSquaredDistanceTo(unit.x, unit.y);
+        }
+		
+        public void Update(double x, double y)
+        {
+            this.x = x;
+            this.y = y;
         }
     }
 }

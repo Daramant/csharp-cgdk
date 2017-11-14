@@ -3,7 +3,7 @@ using System;
 namespace Com.CodeGame.CodeWars2017.DevKit.CSharpCgdk.Model {
     public class Vehicle : CircularUnit {
         private readonly long playerId;
-        private readonly int durability;
+        private int durability;
         private readonly int maxDurability;
         private readonly double maxSpeed;
         private readonly double visionRange;
@@ -17,11 +17,11 @@ namespace Com.CodeGame.CodeWars2017.DevKit.CSharpCgdk.Model {
         private readonly int groundDefence;
         private readonly int aerialDefence;
         private readonly int attackCooldownTicks;
-        private readonly int remainingAttackCooldownTicks;
+        private int remainingAttackCooldownTicks;
         private readonly VehicleType type;
         private readonly bool isAerial;
-        private readonly bool isSelected;
-        private readonly int[] groups;
+        private bool isSelected;
+        protected int[] groups;
 
         public Vehicle(long id, double x, double y, double radius, long playerId, int durability, int maxDurability,
                 double maxSpeed, double visionRange, double squaredVisionRange, double groundAttackRange,
@@ -110,6 +110,16 @@ namespace Com.CodeGame.CodeWars2017.DevKit.CSharpCgdk.Model {
                 Array.Copy(this.groups, groups, this.groups.Length);
                 return groups;
             }
+        }
+		
+        public void Update(VehicleUpdate vehicleUpdate)
+        {
+            Update(vehicleUpdate.X, vehicleUpdate.Y);
+            
+            this.durability = vehicleUpdate.Durability;
+            this.remainingAttackCooldownTicks = vehicleUpdate.RemainingAttackCooldownTicks;
+            this.isSelected = vehicleUpdate.IsSelected;
+            this.groups = vehicleUpdate.Groups;
         }
     }
 }
